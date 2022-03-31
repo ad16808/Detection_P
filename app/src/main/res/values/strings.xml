@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PlantD</string>
+    <string name="take_action">Take action</string>
+    <string name="leaf">Leaf</string>
 </resources>
