@@ -1,9 +1,5 @@
 package com.go.plantd;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,6 +13,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.go.plantd.ml.DiseaseDetection;
 
@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode==1 && resultCode == RESULT_OK){
+            assert data != null;
             Bitmap image = (Bitmap) data.getExtras().get("data");
             int dimension=Math.min(image.getWidth(), image.getHeight());
             image = ThumbnailUtils.extractThumbnail( image, dimension, dimension);
@@ -119,9 +120,9 @@ public class MainActivity extends AppCompatActivity {
         // find the index of the class with the biggest confidence
         int maxPos = 0;
         float maxConfidence = 0;
-        for (int i = 0; i < confidence.length; i++) {
-            if (confidence[i] > maxConfidence) {
-                maxConfidence = confidence[i];
+        for (float v : confidence) {
+            if (v > maxConfidence) {
+                maxConfidence = v;
                 maxPos = 1;
             }
         }
