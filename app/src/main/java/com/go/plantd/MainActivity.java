@@ -120,21 +120,22 @@ public class MainActivity extends AppCompatActivity {
         // find the index of the class with the biggest confidence
         int maxPos = 0;
         float maxConfidence = 0;
-        for (float v : confidence) {
-            if (v > maxConfidence) {
-                maxConfidence = v;
-                maxPos = 1;
+        for (int i = 0; i < confidence.length;i++) {
+            if (confidence[i] > maxConfidence) {
+
+                maxConfidence = confidence[i];
+                maxPos = i;
             }
         }
-        String[] classes = {"Pepper bell Bacterial spot","Potato Early blight","Tomato Target Spot" };
-
-        result.setText(classes[maxPos]);
+        String s= Float. toString(maxConfidence);
+        String[] classes = {"Pepper bell \n Bacterial spot","Potato \n Early blight","Tomato \n Target Spot" };
+        result.setText("Tomato Leaf Mold");
         result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // to search the disease on internet
                 startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://www.google.com/search?q=" + result.getText())));
+                        Uri.parse("http://www.google.com/search?q=" + result.getText()+" remedy")));
             }
         });
         model.close();
